@@ -30,8 +30,7 @@ public class MyStack
 	{
 		if(isEmpty())
 		{
-			System.out.println("Pilha vazia.");
-			return null;
+			return "Pilha vazia.";
 		}
 
 		String s = first.item;
@@ -45,8 +44,7 @@ public class MyStack
 	{
 		if(isEmpty())
 		{
-			System.out.println("Pilha vazia.");
-			return null;
+			return "Pilha vazia.";
 		}
 
 		return first.item;

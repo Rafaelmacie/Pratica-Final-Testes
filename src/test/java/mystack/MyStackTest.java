@@ -11,7 +11,6 @@ public class MyStackTest {
 
     private MyStack stack;
 
-    // Inicializa uma nova pilha antes de cada teste
     @BeforeEach
     void setUp() {
         stack = new MyStack();
@@ -34,7 +33,6 @@ public class MyStackTest {
         stack.push("Segundo");
         stack.push("Terceiro");
 
-        // Como é uma pilha (LIFO), o último a entrar deve ser o primeiro a sair
         assertEquals("Terceiro", stack.pop());
         assertEquals("Segundo", stack.pop());
         assertEquals("Primeiro", stack.pop());
@@ -47,22 +45,22 @@ public class MyStackTest {
         
         assertEquals("Item Fixo", stack.peek(), "O peek deve retornar o item do topo.");
         assertFalse(stack.isEmpty(), "O peek não deve remover o item da pilha.");
-        assertEquals("Item Fixo", stack.pop(), "O pop subsequente deve retornar o mesmo item.");
+        assertEquals("Item Fixo", stack.pop(), "O pop subsequente deve retornar o mesmo item e removê-lo");
+        assertTrue(stack.isEmpty(), "A pilha deve estar vazia");
+    }
+
+    @Test
+    void testPeekOnEmptyStack(){
+        assertEquals("Pilha vazia.", stack.peek());
     }
 
     @Test
     void testPopOnEmptyStack() {
-        assertNull(stack.pop(), "O pop em uma pilha vazia deve retornar null.");
-    }
-
-    @Test
-    void testPeekOnEmptyStack() {
-        assertNull(stack.peek(), "O peek em uma pilha vazia deve retornar null.");
+        assertEquals("Pilha vazia.", stack.pop());
     }
 
     @Test
     void testPrintOutput() {
-        // Redireciona a saída do console para podermos testar o que o método print() escreve
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
@@ -73,10 +71,8 @@ public class MyStackTest {
         
         stack.print();
 
-        // Verifica se a formatação impressa está exatamente igual ao esperado
         assertEquals("C -> B -> A -> null.\n", outContent.toString());
 
-        // Restaura a saída padrão do sistema
         System.setOut(originalOut);
     }
 }
