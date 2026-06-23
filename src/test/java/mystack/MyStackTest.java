@@ -41,16 +41,32 @@ public class MyStackTest {
 
     @Test
     void testPeekDoesNotRemoveItem() {
-        stack.push("Item Fixo");
-        
-        assertEquals("Item Fixo", stack.peek(), "O peek deve retornar o item do topo.");
+        stack.push("Item");
+
+        assertEquals("Item", stack.peek(), "O peek deve retornar o item do topo.");
         assertFalse(stack.isEmpty(), "O peek não deve remover o item da pilha.");
-        assertEquals("Item Fixo", stack.pop(), "O pop subsequente deve retornar o mesmo item e removê-lo");
+        assertEquals("Item", stack.pop(), "O pop subsequente deve retornar o mesmo item e removê-lo");
         assertTrue(stack.isEmpty(), "A pilha deve estar vazia");
     }
 
     @Test
-    void testPeekOnEmptyStack(){
+    void testPushNullThrowsException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            stack.push(null);
+        });
+
+        assertEquals("O item não pode ser nulo ou vazio.", exception.getMessage());
+    }
+
+    @Test
+    void testPushEmptyStringThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            stack.push("   ");
+        });
+    }
+
+    @Test
+    void testPeekOnEmptyStack() {
         assertEquals("Pilha vazia.", stack.peek());
     }
 
@@ -68,7 +84,7 @@ public class MyStackTest {
         stack.push("A");
         stack.push("B");
         stack.push("C");
-        
+
         stack.print();
 
         assertEquals("C -> B -> A -> null.\n", outContent.toString());

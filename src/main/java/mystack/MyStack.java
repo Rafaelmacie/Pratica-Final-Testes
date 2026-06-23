@@ -1,22 +1,22 @@
 package mystack;
 
-public class MyStack
-{
+public class MyStack {
 	private Node first = null;
 
-	private class Node
-	{
+	private class Node {
 		String item;
 		Node next;
 	}
 
-	public boolean isEmpty()
-	{
+	public boolean isEmpty() {
 		return first == null;
 	}
 
-	public void push(String s)
-	{
+	public void push(String s) {
+		if (s == null || s.trim().isEmpty()) {
+			throw new IllegalArgumentException("O item não pode ser nulo ou vazio.");
+		}
+
 		Node p = new Node();
 
 		p.item = s;
@@ -26,10 +26,8 @@ public class MyStack
 		first = p;
 	}
 
-	public String pop()
-	{
-		if(isEmpty())
-		{
+	public String pop() {
+		if (isEmpty()) {
 			return "Pilha vazia.";
 		}
 
@@ -40,22 +38,19 @@ public class MyStack
 		return s;
 	}
 
-	public String peek()
-	{
-		if(isEmpty())
-		{
+	public String peek() {
+		if (isEmpty()) {
 			return "Pilha vazia.";
 		}
 
 		return first.item;
 	}
 
-	public void print()
-	{
+	public void print() {
 		Node p;
 
-		for(p = first; p != null; p = p.next)
-			System.out.printf("%s -> ",p.item);
+		for (p = first; p != null; p = p.next)
+			System.out.printf("%s -> ", p.item);
 		System.out.printf("null.\n");
 	}
 }
